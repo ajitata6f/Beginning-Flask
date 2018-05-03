@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block title %}Unconfirmed{% endblock title %}
+{% block body %}
+    {{ super() }}
+    <div class="jumbotron">
+        <h2 class="display-3">User Account not Confirmed</h2>
+        <p class="lead">Please log into your email account and click on the confirmation link in the email that was sent to you.</p>
+        <hr class="my-2">
+        <p>Need another confirmation email?</p>
+        <p class="lead">
+            <a href='{{ url_for('resend_confirmation') }}' class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Click here</a>
+        </p>
+    </div>
+{% endblock body %}

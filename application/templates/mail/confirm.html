@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}Account Confirmation{% endblock title %}
+{% block body %}
+    <h2>Dear {{ user.username }},</h2>
+    <p>
+        Welcome to Beginning Flask,<br>
+        To confirm your account please click on the following link:
+        <a href="{{url_for('confirm', token=token, _external=True)}}">confirmation link</a>
+    </p>
+    <p>
+        Sincerely,<br>
+        The Beginning Flask Team<br>
+        Note: replies to this email are not monitored
+    </p>
+{% endblock body %}
+
+
+

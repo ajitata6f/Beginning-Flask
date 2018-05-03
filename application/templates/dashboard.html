@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% import '_macros.html' as macros %}
+{% block title %}Dashborad{% endblock title %}
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Beginning Flask</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("user", username=current_user.username) }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        FAQ
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">About</a>
+                </li>
+            </ul>
+
+             {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}" style="color:#fff">Sign Out</a></li>
+             {% else %}
+                <li><a href="{{ url_for('index') }}" style="color:#fff">Sign In</a></li>
+             {% endif %}
+        </div>
+    </nav>
+{% endblock header %}
+
+{% block body %}
+    <h1>Welcome, {{ current_user.username|capitalize }}</h1>
+    <form method="POST" action="{{ url_for('dashboard') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.body(class='form-control', placeholder="What's on your mind?") }}
+        </div>
+
+        {{ form.submit(class="btn bg-primary") }}
+    </form>
+
+    {% include '_post.html' %}
+    {# pagination #}
+    <nav class="pagination">
+        {{ macros.pagination_widget(pagination, 'dashboard') }}
+    </nav>
+{% endblock body %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock scripts %}

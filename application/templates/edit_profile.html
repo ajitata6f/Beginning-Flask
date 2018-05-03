@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Edit Profile{% endblock title %}
+{% block body %}
+    <h1>Edit Your Profile</h1>
+    <form method="POST" action="{{ url_for('edit_profile') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.firstname.label }}
+            {{ form.firstname(class='form-control', placeholder='Enter Firstname') }}
+        </div>
+
+        <div class="form-group">
+            {{ form.lastname.label }}
+            {{ form.lastname(class='form-control', placeholder='Enter Lastname') }}
+        </div>
+
+        <div class="form-group">
+            {{ form.location.label }}
+            {{ form.location(class='form-control', placeholder='Enter Location') }}
+        </div>
+
+        <div class="form-group">
+            {{ form.about_me.label }}
+            {{ form.about_me(class='form-control', placeholder='Enter About me') }}
+        </div>
+
+        <button class="btn bg-primary" type="submit">Edit Profile</button>
+    </form>
+{% endblock body %}

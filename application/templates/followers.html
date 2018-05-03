@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{ title }} {{ user.username }}{% endblock title %}
+
+{% block body %}
+    {{ super() }}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+              <th scope="col">Serial</th>
+              <th scope="col">User</th>
+              <th scope="col">Follow Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for follow in follows %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ url_for('user', username=follow['user'].username) }}">
+                            <img class="img-thumbnail img-fluid" src="{{ follow['user'].gravatar(size=20) }}">
+                            {{ follow['user'].username }}
+                        </a>
+                    <td>{{ follow['follow_date'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% import '_macros.html' as macro %}
+    {{ macro.follow_pagination_widget(pagination,endpoint,user) }}
+{% endblock body %}
+

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <h2>Edit Post</h2>
+
+    <form method="post" action="{{ url_for('edit_post', id=post.postID) }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.body(class="form-control", placeholder="What's on your mind?") }}
+        </div>
+
+        {{ form.submit(class='btn btn-primary', value='edit') }}
+    </form>
+
+
+{% endblock body %}

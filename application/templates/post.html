@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Post{% endblock title %}
+
+{% block body %}
+    {{ super() }}
+    {% include '_post.html' %}
+
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in comments %}
+            <li class="">{{ comment.body }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post" action="{{ url_for('post', id=posts[0].postID) }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.body(class="form-control", placeholder='Write a comment...') }}
+        </div>
+
+        {{ form.submit(class='btn btn-primary') }}
+    </form>
+
+
+{% endblock body %}

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block title %}Registration{% endblock title %}
+
+{% block body %}
+    {{ super() }}
+    <div class="jumbotron">
+        <h2 class="text-center">User Registration</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+            {{ form.csrf_token }}
+
+            <div class="form-group">
+                {{ form.username.label() }}
+                {{ form.username(class="form-control", placeholder="Username") }}
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <span style="color:red">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label() }}
+                {{ form.email(class="form-control", placeholder="Email") }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span style="color:red">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label() }}
+                {{ form.password(class="form-control", placeholder="Password") }}
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <span style="color:red">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.confirm_password.label() }}
+                {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+                {% if form.confirm_password.errors %}
+                    {% for error in form.confirm_password.errors %}
+                        <span style="color:red">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg col-md-4 col-xs-12 ">Register</button>
+        </form><!--End of form-->
+    </div>
+{% endblock body %}
